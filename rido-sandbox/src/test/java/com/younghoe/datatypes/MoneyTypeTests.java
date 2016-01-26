@@ -1,5 +1,7 @@
 package com.younghoe.datatypes;
 
+import org.joda.money.CurrencyUnit;
+import org.joda.money.Money;
 import org.junit.Test;
 
 import java.math.BigDecimal;
@@ -7,6 +9,7 @@ import java.util.Currency;
 import java.util.Locale;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotSame;
 
 /**
  * Created by tony on 2016. 1. 26..
@@ -51,6 +54,17 @@ public class MoneyTypeTests {
         assertEquals("30,000", won.withComma());
         System.out.println("Max of Int: " + Integer.MAX_VALUE);
         System.out.println("Max of Long: " + Long.MAX_VALUE);
+
+        // Use Joda-money
+        Money money = Money.of(CurrencyUnit.of("KRW"), new BigDecimal(30000.0));
+        assertEquals(30000, money.getAmountMajorInt());
+        assertEquals(new BigDecimal(30000), money.getAmount());
+        assertEquals(new BigDecimal(30000), money.getAmountMinor());
+        assertEquals(new BigDecimal(30000), money.getAmountMajor());
+        assertEquals("￦", money.getCurrencyUnit().getSymbol());
+        assertNotSame("₩", money.getCurrencyUnit().getSymbol()); // WARN!
+        assertEquals("\uFFE6", money.getCurrencyUnit().getSymbol());
+        assertNotSame("\u20A9", money.getCurrencyUnit().getSymbol()); // WARN!
 
     }
 }
