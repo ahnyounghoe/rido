@@ -1,10 +1,16 @@
 package com.younghoe.spring;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.validation.constraints.Size;
+
+
 /**
  * Created by tony on 2016. 1. 26..
  */
 public class User {
 
+    @NotEmpty
     private String firstName;
 
     private String lastName;
