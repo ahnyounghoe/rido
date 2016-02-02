@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
  *     <ul>
  *         <li>Entity 저장할 때 @{link LocalDateTimeAttributeConverter} 적용</li>
  *         <li>Entity 저장할 때 @{link javax.persistence.Embedded Embedded} 적용</li>
+ *         <li>Flyway 활용하여 DB migration</li>
  *     </ul>
  * </p>
  *
@@ -23,7 +24,9 @@ import java.time.LocalDateTime;
 @SpringBootApplication
 @RestController
 public class JpaApplication {
+
     public static void main(String... args){
+        System.setProperty("spring.jpa.hibernate.ddl-auto", "validate"); // Flyway 적용을 위한 필수 옵션
         SpringApplication.run(JpaApplication.class, args);
     }
 
